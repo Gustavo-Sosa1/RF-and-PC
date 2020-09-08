@@ -18,11 +18,12 @@ m[1:179,] <- 0 #create 179 empty rows in m dataframe
 #-------------------------------------------------
 #ten-fold cross-validation model performance with overall dataset
 #-------------------------------------------------
-set.seed(12345);disorder <- sample(length(RPAd[,2]),replace=F) #extracting a random sample of rows from the second column of RPAD wihtout replacement
+set.seed(12345);disorder <- sample(length(RPAd[,2]),replace=F) #extracting a random sample of rows from the second column of RPAD without replacement
 for(k in 1:10){
-  n <- data.frame(r2=0,rm=0)
-  o <- disorder[(65*(k-1)+1):(65*k)]
-  rf.data <- RPAd[-o,]
+  n <- data.frame(r2=0,rm=0) #create empty dataframe with columns r2 and rm
+  o <- disorder[(65*(k-1)+1):(65*k)] #taking a subset of disorder with length 65
+  rf.data <- RPAd[-o,] #removing the rows matching with the above subset from the Data and saving as new dataframe
+#for loop above is conducting the tenfold cross validation, o is the testing data set and rf.data is the training set, currently is set to a 90/10 training/testing spilt
   for (i in 27:204){
     RPAdatai <- cbind(rf.data[i],rf.data[,4:13])
     colnames(RPAdatai) <- c("RPA",savenames)
