@@ -25,8 +25,8 @@ for(k in 1:10){
   rf.data <- RPAd[-o,] #removing the rows matching with the above subset from the Data and saving as new dataframe
 #for loop above is conducting the tenfold cross validation, o is the testing data set and rf.data is the training set, currently is set to a 90/10 training/testing spilt
   for (i in 27:204){
-    RPAdatai <- cbind(rf.data[i],rf.data[,4:13])
-    colnames(RPAdatai) <- c("RPA",savenames)
+    RPAdatai <- cbind(rf.data[i],rf.data[,4:13]) #make a dataframe with 1 protein's relative abundance and nanoparticle details
+    colnames(RPAdatai) <- c("RPA",savenames) #changen column name from protein accession number to "RPA"
     set.seed(12345)
     rf <- randomForest(RPA~., data=RPAdatai, proximity=F, importance=F)
     p <- predict(rf,RPAd[o,4:13]);
