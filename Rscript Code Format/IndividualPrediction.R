@@ -18,7 +18,7 @@ m[1:179,] <- 0
 #-------------------------------------------------
 #ten-fold cross-validation model performance with overall dataset
 #-------------------------------------------------
-set.seed(12345);disorder <- sample(length(RPAd[,2]),replace=F)
+set.seed(12345);disorder <- sample(length(RPAd[,2]),replace=F) #extracting a random sample of rows from the second column of RPAD
 for(k in 1:10){
   n <- data.frame(r2=0,rm=0)
   o <- disorder[(65*(k-1)+1):(65*k)]
