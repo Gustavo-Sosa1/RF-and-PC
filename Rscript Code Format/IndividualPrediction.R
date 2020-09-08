@@ -73,7 +73,7 @@ write.csv(m,"proteins.r2.rmse.10.csv")
 #factor selection
 #=========================
 #====================================
-setwd("E:/学习/研究/protein corona/201908/class.model")
+setwd("C:\\Users\\Gustavo\\Documents\\Coding\\RStudioProjects\\RF-and-PC\\Rscript Code Format") #Enter the directory you want to work in here
 RPAd <- read.csv("class.280.save.csv")
 RPAd <- as.data.frame(RPAd)
 colnames(RPAd)
@@ -116,7 +116,7 @@ write.csv(n,"proteins.r2.rmse.10.csv")
 
 #人工剔除不重要及重复因素
 #============================
-setwd("E:/学习/研究/protein corona/201908/class.model")
+setwd("C:\\Users\\Gustavo\\Documents\\Coding\\RStudioProjects\\RF-and-PC\\Rscript Code Format") #Enter the directory you want to work in here
 RPAd <- read.csv("class.280.save.csv")
 RPAd <- as.data.frame(RPAd)
 colnames(RPAd)
