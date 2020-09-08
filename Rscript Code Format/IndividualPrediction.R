@@ -7,13 +7,13 @@ library(Metrics)           #RMSE
 #library(e1071)              #取1:n 全排列的所有组合
 #====================================
 setwd("C:\\Users\\Gustavo\\Documents\\Coding\\RStudioProjects\\RF-and-PC\\Rscript Code Format") #Enter the directory you want to work in here
-RPAd <- read.csv("individual.data.csv")
-RPAd <- as.data.frame(RPAd)
-colnames(RPAd)
+RPAd <- read.csv("individual.data.csv") #Read in data
+RPAd <- as.data.frame(RPAd) #Checks to make sure data is in a dataframe
+colnames(RPAd) #pull column names of RPAd as a vector
 #length(RPAd[,4])
-savenames <- colnames(RPAd[4:13])
-m <- data.frame(0)
-m[1:179,] <- 0
+savenames <- colnames(RPAd[4:13]) #save a subset of the column names as a new vector
+m <- data.frame(0) # create empty dataframe
+m[1:179,] <- 0 #create 179 empty rows in m dataframe
 
 #-------------------------------------------------
 #ten-fold cross-validation model performance with overall dataset
