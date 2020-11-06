@@ -6,15 +6,19 @@ library(randomForest)
 library(Metrics)           #RMSE
 #library(e1071)              #取1:n 全排列的所有组合
 #====================================
-setwd("C:\\Users\\Gustavo\\Documents\\Coding\\RStudioProjects\\RF-and-PC\\Rscript Code Format") #Enter the directory you want to work in here
-RPAd <- read.csv("individual.data.csv") #Read in data
+setwd("C:\\Users\\Gustavo\\Documents\\Coding\\RStudioProjects\\RF-and-PC-master\\Rscript Code Format") #Enter the directory you want to work in here
+#RPAd <- read.csv("individual.data.csv") #Read in data
+RPAd <- individual_datacrossinput
+#RPAd <- RPAd[0:101,0:38]
+RPAd <- RPAd[0:101,0:31] #set to length and width of data
 RPAd <- as.data.frame(RPAd) #Checks to make sure data is in a dataframe
 colnames(RPAd) #pull column names of RPAd as a vector
 #length(RPAd[,4])
 savenames <- colnames(RPAd[4:13]) #save a subset of the column names as a new vector
 m <- data.frame(0) # create empty dataframe
-m[1:179,] <- 0 #create 179 empty rows in m dataframe 
-pa <- data.frame(z=o)
+m[1:9,] <- 0 #create 179 empty rows in m dataframe #set to number of proteins in training dataset
+#pa <- data.frame(z=o) #set to number of np predicting on
+pa <- ourdata[,1]
 
 #-------------------------------------------------
 #ten-fold cross-validation model performance with overall dataset
@@ -22,33 +26,34 @@ pa <- data.frame(z=o)
 set.seed(12345);disorder <- sample(length(RPAd[,2]),replace=F) #extracting a random sample of rows from the second column of RPAD without replacement
 for(k in 1:10){
   n <- data.frame(r2=0,rm=0) #create empty dataframe with columns r2 and rm
-  o <- disorder[(2*(k-1)+1):(2*k)] #taking a subset of disorder with length 65 #set to length of data divided by 10
+  o <- disorder[(10*(k-1)+1):(10*k)] #taking a subset of disorder with length 65 #set to length of data divided by 10
   rf.data <- RPAd[-o,] #removing the rows matching with the above subset from the Data and saving as new dataframe
 #for loop above is conducting the tenfold cross validation, o is the testing data set and rf.data is the training set, currently is set to a 90/10 training/testing split. #set for loop to column numbers of proteins
-  for (i in 24:201){
+  for (i in 24:31){
     RPAdatai <- cbind(rf.data[i],rf.data[,4:13]) #make a dataframe with 1 protein's relative abundance and nanoparticle details
     colnames(RPAdatai) <- c("RPA",savenames) #change column name from protein accession number to "RPA"
     set.seed(12345)
     rf <- randomForest(RPA~., data=RPAdatai, proximity=F, importance=F)
-    p <- predict(rf,RPAd[o,4:13]);
-    a <- RPAd[o,i];
+#    p <- predict(rf,RPAd[o,4:13]);
+    p <- predict(rf,ourdata[,2:12]);
+#    a <- RPAd[o,i];
+    a <- ourdata[i-12]; #set to indivual column of protein in actual data as a refernce from i
     pa <- cbind(pa, cbind(p,a));
     r2 <- cor(p,a);
+    colnames(r2) <- "r2";
     rm <- rmse(p,a);
     n <- rbind(n,cbind(r2,rm))
   }
+  write.csv(pa, "paprediction.csv")
+  write.csv(n,"accuracypredict.csv")
   m <- cbind(m,n)
 }
 write.csv(m,"individual.r2.rmse.10.csv")
-
-
 
 #-------------------------------------------------
 #factor selection
 #ten-fold cross-validation model performance 
 #-------------------------------------------------
-
-
 set.seed(12345);disorder <- sample(length(RPAd[,2]),replace=F)
 for(k in 1:10){
   n <- data.frame(r2=0,rm=0)

@@ -1,0 +1,32 @@
+---
+title: "Formatting Our Data"
+author: "Gustavo Sosa Macias"
+date: "11/3/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+colnames <- colnames(individual_data[,24:201])
+
+proteinspeccount <- proteinspeccount%>%
+  mutate(AMNP = AMNP/sum(AMNP),
+         CMNP = CMNP/sum(CMNP),
+         NP50 = NP50/sum(NP50),
+         con = con/sum(con),
+         p2k = p2k/sum(p2k),
+         p20k = p20k/sum(p20k),
+         phys = phys/sum(phys))
+
+crossref <- proteinspeccount%>%
+  filter(`Accession Number` %in% colnames)
+
+df2 <- data.frame(t(crossref))
+
+write.csv(df2,"formatted_pnas_our.csv")
+
+```

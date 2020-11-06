@@ -1,0 +1,8 @@
+npname,SizeTEM..nm.,Zeta.potential,Incubation.protein.source,Incubation.plasma.concentration..v.v..,Incubation.NP.concentration..mg.L.,Centrifugation.speed..g.,Centrifugation.time.ï..minï..,Certrifugation.temperature..â.ƒ.,NP.type,NP.shape
+AMNP,200,-40,FBS,,,,,4,metal,sphere
+CMNP,200,-40,FBS,,,,,4,metal,sphere
+NP50,50,-45.2,FBS,,,,,4,,sphere
+con,200,-39.2,FBS,,,,,4,,sphere
+p2k,200,-23.6,FBS,,,,,4,,sphere
+p20k,200,-1.44,FBS,,,,,4,,sphere
+phys,200,-39.2,FBS,,,,,4,,sphere
