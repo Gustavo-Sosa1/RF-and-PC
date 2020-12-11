@@ -6,7 +6,7 @@ library(randomForest)
 library(Metrics)           #RMSE
 #library(e1071)              #取1:n 全排列的所有组合
 #====================================
-setwd("C:\\Users\\Gustavo\\Documents\\Coding\\RStudioProjects\\RF-and-PC-master\\Rscript Code Format") #Enter the directory you want to work in here
+setwd("C:\\Users\\Gustavo\\Documents\\Coding\\RStudioProjects\\RF-and-PC\\Rscript Code Format") #Enter the directory you want to work in here
 #RPAd <- read.csv("individual.data.csv") #Read in data
 RPAd <- individual_datacrossinput
 #RPAd <- RPAd[0:101,0:38]
